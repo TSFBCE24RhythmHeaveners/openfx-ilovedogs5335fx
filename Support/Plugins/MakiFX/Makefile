@@ -27,7 +27,7 @@ MakiFX.ofx: CCKaleida.o UserDefinedShader.o PluginRegistration.o ofxsCore.o ofxs
 
 clean:
 	rm -f *.o *.ofx
-	rm -fr BetaFX.ofx.bundle
+	rm -fr MakiFX.ofx.bundle
 
-install: BetaFX.ofx
-	cp -fr BetaFX.ofx.bundle build
+install: MakiFX.ofx
+	cp -fr MakiFX.ofx.bundle build
