@@ -15,6 +15,15 @@
 #include <stdio.h>
 #include "ofxsImageEffect.h"
 
+#define PLUGIN_NAME "Choice Parameters Deluxe"
+#define PLUGIN_GROUP "Stylize"
+#define PLUGIN_DESC "A better version of Choice Parameters with another thing."
+#define PLUGIN_ID "com.kocsisfx.choiceparamsdx"
+#define PLUGIN_VER_MAJOR 1
+#define PLUGIN_VER_MINOR 0
+
+using namespace OFX;
+
 #include "../include/ofxsProcessing.H"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -190,7 +199,7 @@ protected :
 
   OFX::ChoiceParam  *red_choice_;
   OFX::ChoiceParam  *green_choice_;
-  OFX::StrChoiceParam  *blue_choice_;
+  OFX::ChoiceParam  *blue_choice_;
 
 public :
   /** @brief ctor */
@@ -200,7 +209,7 @@ public :
     , srcClip_(0)
     , red_choice_(0)
     , green_choice_(0)
-    , blue_choice_()
+    , blue_choice_(0)
   {
     dstClip_ = fetchClip(kOfxImageEffectOutputClipName);
     srcClip_ = fetchClip(kOfxImageEffectSimpleSourceClipName);
@@ -208,9 +217,7 @@ public :
     maskClip_ = getContext() == OFX::eContextFilter ? NULL : fetchClip(getContext() == OFX::eContextPaint ? "Brush" : "Mask");
     red_choice_   = fetchChoiceParam("red_choice");
     green_choice_  = fetchChoiceParam("green_choice");
-    if (OFX::getImageEffectHostDescription()->supportsStrChoice)  {
-      blue_choice_ = fetchStrChoiceParam("blue_choice");
-    }
+    blue_choice_ = fetchChoiceParam("blue_choice");
   }
 
   /* Override the render */
